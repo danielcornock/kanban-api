@@ -4,7 +4,7 @@ import {
   INext
 } from '../../../config/interfaces/IMiddlewareParams';
 import { Story } from '../model/storyModel';
-import { ResponseService } from '../../../utilities/responseService';
+import { ResponseService } from '../../../services/responseService';
 
 export class StoryController {
   private _model: Story;

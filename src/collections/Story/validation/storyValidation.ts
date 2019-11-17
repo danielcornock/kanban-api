@@ -1,5 +1,5 @@
 import { IStory } from '../interfaces/IStory';
-import { isGuid, exists } from '../../../utilities/validation/validate';
+import { isGuid, exists } from '../../../services/validation/validationService';
 
 export class StoryValidation {
   constructor() {}

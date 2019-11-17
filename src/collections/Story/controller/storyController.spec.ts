@@ -27,7 +27,6 @@ describe('on initialisation', () => {
 
     beforeEach(() => {
       controller.getAllStories(req as IRequest, res as IResponse, next);
-      sinon.stub(controller, 'test');
     });
 
     it('should call the validate function');

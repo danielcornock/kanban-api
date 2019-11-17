@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { isGuid, isEmail, isValidPassword, exists } from './validate';
+import { isGuid, isEmail, isValidPassword, exists } from './validationService';
 
 describe('when validating a GUID', () => {
   describe('when the GUID supplied is not valid', () => {
