@@ -1,7 +1,5 @@
 import dotenv from 'dotenv';
-
 import { IParams } from './interfaces/IParams';
-
 dotenv.config({ path: './config.env' });
 
 export const env: string = process.env.NODE_ENV || 'development';
