@@ -3,7 +3,7 @@ import 'mocha';
 
 import { StoryRouter } from './storyRouter';
 
-describe('on initialisation', () => {
+describe('storyRouter', () => {
   const storyRouter = new StoryRouter();
 
   it('should assign the routes', () => {

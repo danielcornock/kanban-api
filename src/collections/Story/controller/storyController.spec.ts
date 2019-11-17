@@ -12,7 +12,7 @@ import sinonChai from 'sinon-chai';
 
 chai.use(sinonChai);
 
-describe('on initialisation', () => {
+describe('storyController', () => {
   const controller = new StoryController();
   const model = new Story();
 

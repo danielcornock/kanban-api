@@ -3,33 +3,35 @@ import { expect } from 'chai';
 import { database, port, env } from './env';
 import 'mocha';
 
-describe('when fetching the database connection string', () => {
-  describe('when the environment is development', () => {
-    const result: string = database('development');
+describe('env', () => {
+  describe('when fetching the database connection string', () => {
+    describe('when the environment is development', () => {
+      const result: string = database('development');
 
-    it('should return the connection string for the remote database', () => {
-      expect(result).to.include('mongodb+srv://daniel');
+      it('should return the connection string for the remote database', () => {
+        expect(result).to.include('mongodb+srv://daniel');
+      });
+    });
+
+    describe('when the environment is local', () => {
+      const result: string = database('local');
+
+      it('should return the connection string for the local database', () => {
+        expect(result).to.include('mongodb://');
+      });
     });
   });
 
-  describe('when the environment is local', () => {
-    const result: string = database('local');
+  describe('when fetching the constants', () => {
+    const envPort: string = process.env.NODE_PORT as string;
+    const envEnv: string = process.env.NODE_ENV as string;
 
-    it('should return the connection string for the local database', () => {
-      expect(result).to.include('mongodb://');
+    it('should return the correct port', () => {
+      expect(port).to.equal(envPort);
     });
-  });
-});
 
-describe('when fetching the constants', () => {
-  const envPort: string = process.env.NODE_PORT as string;
-  const envEnv: string = process.env.NODE_ENV as string;
-
-  it('should return the correct port', () => {
-    expect(port).to.equal(envPort);
-  });
-
-  it('should return the correct environment', () => {
-    expect(env).to.equal(envEnv);
+    it('should return the correct environment', () => {
+      expect(env).to.equal(envEnv);
+    });
   });
 });

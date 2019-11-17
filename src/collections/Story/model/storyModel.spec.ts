@@ -3,7 +3,7 @@ import 'mocha';
 
 import { Story } from './storyModel';
 
-describe('on initialisation', () => {
+describe('storyModel', () => {
   const story = new Story();
 
   it('should create the model', () => {

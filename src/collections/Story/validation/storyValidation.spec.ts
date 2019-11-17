@@ -3,7 +3,7 @@ import 'mocha';
 import { StoryValidation } from './storyValidation';
 import { IStory } from '../interfaces/IStory';
 
-describe('on initialisation', () => {
+describe('storyValidation', () => {
   const validator = new StoryValidation();
 
   describe('when an story without a title is passed in to the function', () => {
