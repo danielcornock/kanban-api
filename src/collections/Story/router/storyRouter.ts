@@ -9,5 +9,6 @@ export class StoryRouter extends BaseRoutes {
 
   protected _assignRoutes() {
     this.router.get('/', (...args) => this.controller.getAllStories(...args));
+    this.router.post('/', (...args) => this.controller.createStory(...args));
   }
 }

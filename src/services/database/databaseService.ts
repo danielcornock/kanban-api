@@ -1,20 +1,23 @@
-import { Model, DocumentQuery, Query } from 'mongoose';
+import { Model, DocumentQuery, Query, Document } from 'mongoose';
 import { IParams } from '../../config/interfaces/IParams';
 
 export class DatabaseService<T extends Document> {
-  private _model: Model<any>;
+  private _model: Model<T>;
 
-  constructor(model: Model<any>) {
+  constructor(model: Model<T>) {
     this._model = model;
   }
 
-  public findOne(userId: string, params: IParams): DocumentQuery<T, any, {}> {
+  public findOne(
+    userId: string,
+    params: IParams
+  ): DocumentQuery<T | null, T, {}> {
     return this._model.findOne(params);
   }
 
   public findMany(
     userId: string,
-    params: IParams
+    params?: IParams
   ): DocumentQuery<T[], any, {}> {
     return this._model.find(params);
   }

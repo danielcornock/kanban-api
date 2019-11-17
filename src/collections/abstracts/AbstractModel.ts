@@ -6,8 +6,8 @@ export abstract class AbstractModel<T extends Document> {
 
   constructor() {}
 
-  protected _getModel(name: string, schema: Schema<T>): Model<T> {
-    return models.Story ? models.Story : model(name, schema);
+  protected _getModel(name: string, schema: () => Schema<T>): Model<T> {
+    return models.Story ? models.Story : model<T>(name, schema());
   }
 
   public validateEntries(document: T) {

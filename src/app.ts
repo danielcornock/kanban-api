@@ -8,9 +8,9 @@ export class App {
 
   constructor() {
     this._instance = express();
+    new DatabaseConnection();
     new Middleware(this._instance);
     new Router(this._instance);
-    new DatabaseConnection();
   }
 
   public get instance(): express.Application {
