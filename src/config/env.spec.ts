@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { database, port, env } from './config';
+import { database, port, env } from './env';
 import 'mocha';
 
 describe('when fetching the database connection string', () => {

@@ -1,11 +1,14 @@
 import express from 'express';
-import { Story } from './collections/Story/Story';
+import { Router } from './collections/Router';
+import { Middleware } from './config/appMiddleware';
 
 export class App {
   private _instance: express.Application;
 
   constructor() {
     this._instance = express();
+    new Middleware(this._instance);
+    new Router(this._instance);
   }
 
   public get instance(): express.Application {

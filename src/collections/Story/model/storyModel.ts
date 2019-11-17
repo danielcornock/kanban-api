@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
-import { AbstractModel } from '../abstracts/AbstractModel';
-import { IStory } from './IStory';
-import { StoryValidation } from './storyValidation';
+import { AbstractModel } from '../../abstracts/abstractModel';
+import { IStory } from '../interfaces/IStory';
+import { StoryValidation } from '../validation/storyValidation';
 
 export class Story extends AbstractModel<IStory> {
   constructor() {

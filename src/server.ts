@@ -1,6 +1,6 @@
 import express from 'express';
 import { App } from './app';
-import { port } from './config/config';
+import { port } from './config/env';
 
 export class Server {
   constructor() {

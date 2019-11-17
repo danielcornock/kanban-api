@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 import { StoryValidation } from './storyValidation';
-import { IStory } from './IStory';
+import { IStory } from '../interfaces/IStory';
 
 describe('on initialisation', () => {
   const validator = new StoryValidation();
