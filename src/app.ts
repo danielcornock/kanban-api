@@ -1,4 +1,5 @@
 import express from 'express';
+import { Story } from './collections/Story/Story';
 
 export class App {
   private _instance: express.Application;

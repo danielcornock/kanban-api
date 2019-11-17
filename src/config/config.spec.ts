@@ -11,13 +11,13 @@ describe('when fetching the database connection string', () => {
       expect(result).to.include('mongodb+srv://daniel');
     });
   });
-});
 
-describe('when the environment is local', () => {
-  const result: string = database('local');
+  describe('when the environment is local', () => {
+    const result: string = database('local');
 
-  it('should return the connection string for the local database', () => {
-    expect(result).to.include('mongodb://');
+    it('should return the connection string for the local database', () => {
+      expect(result).to.include('mongodb://');
+    });
   });
 });
 
