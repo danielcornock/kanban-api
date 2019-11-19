@@ -11,7 +11,7 @@ export abstract class BaseEntity<T extends Document> {
 
   protected abstract _createSchema(): Schema<T>;
 
-  public get model() {
-    return this._model;
+  public get model(): Model<T> {
+    return this._model as Model<T>;
   }
 }

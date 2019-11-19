@@ -6,7 +6,6 @@ import { StoryValidation } from '../validation/storyValidation';
 export class Story extends BaseEntity<IStory> {
   constructor() {
     super();
-    this._validation = new StoryValidation().validate;
     this._model = this._getModel(Story.name, this._createSchema);
   }
 
