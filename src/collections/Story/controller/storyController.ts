@@ -1,6 +1,6 @@
 import {
-  IRequest,
-  IResponse,
+  IReq,
+  IRes,
   INext
 } from '../../../utilities/interfaces/IMiddlewareParams';
 import { IController } from '../../../utilities/interfaces/IController';
@@ -15,7 +15,7 @@ export class StoryController extends BaseController<IStory, Story>
     super(new Story(), new StoryValidation());
   }
 
-  public async getAll(req: IRequest, res: IResponse, next: INext) {
+  public async getAll(req: IReq, res: IRes, next: INext) {
     try {
       const stories = await this._modelDb.findMany('');
       this._res.successFind(res, { stories });
@@ -24,7 +24,7 @@ export class StoryController extends BaseController<IStory, Story>
     }
   }
 
-  public async create(req: IRequest, res: IResponse, next: INext) {
+  public async create(req: IReq, res: IRes, next: INext) {
     try {
       this._validate(req.body);
       const story = await this._modelDb.create('', req.body);
@@ -34,7 +34,7 @@ export class StoryController extends BaseController<IStory, Story>
     }
   }
 
-  public async getOne(req: IRequest, res: IResponse, next: INext) {
+  public async getOne(req: IReq, res: IRes, next: INext) {
     try {
       const params = this._queryService.buildParamQuery(req.params);
       const story = this._modelDb.findOne('', params);
@@ -44,7 +44,7 @@ export class StoryController extends BaseController<IStory, Story>
     }
   }
 
-  public async delete(req: IRequest, res: IResponse, next: INext) {
+  public async delete(req: IReq, res: IRes, next: INext) {
     try {
       const params = this._queryService.buildParamQuery(req.params);
       await this._modelDb.deleteOne('', params);
@@ -54,7 +54,7 @@ export class StoryController extends BaseController<IStory, Story>
     }
   }
 
-  public async update(req: IRequest, res: IResponse, next: INext) {
+  public async update(req: IReq, res: IRes, next: INext) {
     try {
       this._validate(req.body);
       const params = this._queryService.buildParamQuery(req.params);

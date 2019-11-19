@@ -1,7 +1,7 @@
-import { IResponse } from '../utilities/interfaces/IMiddlewareParams';
+import { IRes } from '../utilities/interfaces/IMiddlewareParams';
 
 export class ResponseService {
-  public successFind(res: IResponse, data: object | Array<object>): void {
+  public successFind(res: IRes, data: object | Array<object>): void {
     res.status(200).json({
       status: 'success',
       data: {
@@ -10,7 +10,7 @@ export class ResponseService {
     });
   }
 
-  public successCreate(res: IResponse, data: object | Array<object>): void {
+  public successCreate(res: IRes, data: object | Array<object>): void {
     res.status(201).json({
       status: 'success',
       data: {
@@ -19,7 +19,7 @@ export class ResponseService {
     });
   }
 
-  public successDelete(res: IResponse) {
+  public successDelete(res: IRes) {
     res.status(204).send();
   }
 }

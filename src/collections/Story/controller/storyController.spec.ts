@@ -2,10 +2,7 @@ import { expect } from 'chai';
 import 'mocha';
 import { StoryController } from './storyController';
 import sinon from 'sinon';
-import {
-  IRequest,
-  IResponse
-} from '../../../utilities/interfaces/IMiddlewareParams';
+import { IReq, IRes } from '../../../utilities/interfaces/IMiddlewareParams';
 import { Story } from '../model/storyEntity';
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
@@ -17,7 +14,7 @@ describe('storyController', () => {
   const model = new Story();
 
   describe('when requesting for all stories', () => {
-    const req: Partial<IRequest> = {
+    const req: Partial<IReq> = {
       body: {
         user: '0000'
       }
@@ -26,7 +23,7 @@ describe('storyController', () => {
     const next = sinon.stub();
 
     beforeEach(() => {
-      controller.getAll(req as IRequest, res as IResponse, next);
+      controller.getAll(req as IReq, res as IRes, next);
     });
 
     it('should call the validate function');
