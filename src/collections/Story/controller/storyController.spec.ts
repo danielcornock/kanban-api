@@ -5,8 +5,8 @@ import sinon from 'sinon';
 import {
   IRequest,
   IResponse
-} from '../../../config/interfaces/IMiddlewareParams';
-import { Story } from '../model/storyModel';
+} from '../../../utilities/interfaces/IMiddlewareParams';
+import { Story } from '../model/storyEntity';
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
 
@@ -26,7 +26,7 @@ describe('storyController', () => {
     const next = sinon.stub();
 
     beforeEach(() => {
-      controller.getAllStories(req as IRequest, res as IResponse, next);
+      controller.getAll(req as IRequest, res as IResponse, next);
     });
 
     it('should call the validate function');

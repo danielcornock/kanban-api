@@ -1,11 +1,12 @@
 import { Router } from 'express';
+import { IController } from '../../utilities/interfaces/IController';
 
 export abstract class BaseRoutes {
   protected router: Router;
-  protected controller: any;
+  protected controller: IController;
   protected abstract _assignRoutes(): void;
 
-  constructor(controller: any) {
+  constructor(controller: IController) {
     this.controller = controller;
     this.router = Router({ mergeParams: true });
   }

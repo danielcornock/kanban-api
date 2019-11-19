@@ -1,5 +1,5 @@
 import { Model, DocumentQuery, Query, Document } from 'mongoose';
-import { IParams } from '../../config/interfaces/IParams';
+import { IParams } from '../../utilities/interfaces/IParams';
 
 export class DatabaseService<T extends Document> {
   private _model: Model<T>;

@@ -8,17 +8,13 @@ export class StoryRouter extends BaseRoutes {
   }
 
   protected _assignRoutes() {
-    this.router.get('/', (...args) => this.controller.getAllStories(...args));
-    this.router.post('/', (...args) => this.controller.createStory(...args));
+    this.router.get('/', (...args) => this.controller.getAll(...args));
+    this.router.post('/', (...args) => this.controller.create(...args));
 
-    this.router.get('/:storyId', (...args) =>
-      this.controller.getStory(...args)
-    );
-    this.router.put('/:storyId', (...args) =>
-      this.controller.updateStory(...args)
-    );
+    this.router.get('/:storyId', (...args) => this.controller.getOne(...args));
+    this.router.put('/:storyId', (...args) => this.controller.update(...args));
     this.router.delete('/:storyId', (...args) =>
-      this.controller.deleteStory(...args)
+      this.controller.delete(...args)
     );
   }
 }

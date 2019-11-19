@@ -1,4 +1,4 @@
-import { IParams } from '../../config/interfaces/IParams';
+import { IParams } from '../../utilities/interfaces/IParams';
 
 export class QueryService {
   constructor() {}

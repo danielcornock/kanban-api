@@ -1,4 +1,4 @@
-import { IResponse } from '../config/interfaces/IMiddlewareParams';
+import { IResponse } from '../utilities/interfaces/IMiddlewareParams';
 
 export class ResponseService {
   public successFind(res: IResponse, data: object | Array<object>): void {

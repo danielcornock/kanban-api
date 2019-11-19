@@ -1,6 +1,6 @@
 import { Model, Document, models, model, Schema } from 'mongoose';
 
-export abstract class BaseModel<T extends Document> {
+export abstract class BaseEntity<T extends Document> {
   protected _model?: Model<T>;
   protected _validation: any;
 

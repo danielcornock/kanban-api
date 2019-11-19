@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { Story } from './storyModel';
+import { Story } from './storyEntity';
 
-describe('storyModel', () => {
+describe('storyEntity', () => {
   const story = new Story();
 
   it('should create the model', () => {
