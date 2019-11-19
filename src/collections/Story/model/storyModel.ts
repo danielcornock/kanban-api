@@ -1,9 +1,9 @@
 import { Schema } from 'mongoose';
-import { AbstractModel } from '../../abstracts/abstractModel';
+import { BaseModel } from '../../abstracts/baseModel';
 import { IStory } from '../interfaces/IStory';
 import { StoryValidation } from '../validation/storyValidation';
 
-export class Story extends AbstractModel<IStory> {
+export class Story extends BaseModel<IStory> {
   constructor() {
     super();
     this._validation = new StoryValidation().validate;
