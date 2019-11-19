@@ -1,7 +1,7 @@
 import { Model, Document, models, model, Schema } from 'mongoose';
 
 export abstract class BaseEntity<T extends Document> {
-  protected _model?: Model<T>;
+  protected _model!: Model<T>;
 
   constructor() {}
 
@@ -12,6 +12,6 @@ export abstract class BaseEntity<T extends Document> {
   protected abstract _createSchema(): Schema<T>;
 
   public get model(): Model<T> {
-    return this._model as Model<T>;
+    return this._model;
   }
 }
