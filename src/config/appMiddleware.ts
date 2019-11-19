@@ -5,7 +5,7 @@ export class Middleware {
     this.globalSetup(app);
   }
 
-  public globalSetup(app: any): void {
+  public globalSetup(app: express.Application): void {
     app.use(express.json());
   }
 }

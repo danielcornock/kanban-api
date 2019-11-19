@@ -15,10 +15,7 @@ export class DatabaseService<T extends Document> {
     return this._model.findOne(params);
   }
 
-  public findMany(
-    userId: string,
-    params?: IParams
-  ): DocumentQuery<T[], any, {}> {
+  public findMany(userId: string, params?: IParams): DocumentQuery<T[], T, {}> {
     return this._model.find(params);
   }
 
@@ -47,7 +44,7 @@ export class DatabaseService<T extends Document> {
   public async update(
     userId: string,
     query: IParams,
-    data: any
+    data: IParams
   ): Promise<[T, T]> {
     const doc = await this.findOne(userId, query);
     const oldDocument = JSON.parse(JSON.stringify(doc));
