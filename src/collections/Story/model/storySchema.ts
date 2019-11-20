@@ -1,4 +1,6 @@
 import { Schema } from 'mongoose';
+import { Document } from 'mongoose';
+import { IColumn } from '../../Column/model/columnSchema';
 
 export const storySchema = new Schema(
   {
@@ -23,3 +25,12 @@ export const storySchema = new Schema(
     toObject: { virtuals: true }
   }
 );
+
+export interface IStory extends Document {
+  user: string;
+  board: string;
+  column: string;
+  title: string;
+  content: string;
+  number: number;
+}

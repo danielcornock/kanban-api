@@ -1,6 +1,6 @@
 import { BaseEntity } from '../../abstracts/baseEntity';
-import { IColumn } from '../interfaces/IColumn';
-import { Schema } from 'mongoose';
+import { IColumn } from '../model/columnSchema';
+import { Schema, Query } from 'mongoose';
 import { columnSchema } from './columnSchema';
 
 export class Column extends BaseEntity<IColumn> {
@@ -9,11 +9,15 @@ export class Column extends BaseEntity<IColumn> {
     this._createModelConfig(columnSchema);
   }
 
-  protected _createModelConfig(columnSchema: Schema) {
+  private _createModelConfig(columnSchema: Schema) {
     columnSchema.virtual('stories', {
       ref: 'Story',
       foreignField: 'column',
       localField: '_id'
+    });
+
+    columnSchema.pre(/^find/ as any, function(this: Query<IColumn>) {
+      this.populate('stories');
     });
   }
 }

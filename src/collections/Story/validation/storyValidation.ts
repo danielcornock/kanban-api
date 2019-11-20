@@ -1,4 +1,4 @@
-import { IStory } from '../interfaces/IStory';
+import { IStory } from '../model/storySchema';
 import { isGuid, exists } from '../../../services/validation/validationService';
 import { Validation } from '../../abstracts/baseValidation';
 

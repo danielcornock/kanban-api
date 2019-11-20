@@ -1,7 +1,7 @@
 import { BaseController } from '../../abstracts/baseController';
 import { Column } from '../model/columnEntity';
 import { IController } from '../../../utilities/interfaces/IController';
-import { IColumn } from '../interfaces/IColumn';
+import { IColumn } from '../model/columnSchema';
 import { ColumnValidation } from '../validation/columnValidation';
 import {
   IReq,
