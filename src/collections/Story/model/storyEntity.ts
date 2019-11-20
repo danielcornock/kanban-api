@@ -29,7 +29,5 @@ export class Story extends BaseEntity<IStory> {
 
       next();
     });
-
-    schema.post('save', async (doc: IStory) => {});
   }
 }
