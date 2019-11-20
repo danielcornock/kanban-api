@@ -18,14 +18,14 @@ export class Story extends BaseEntity<IStory> {
     const boardDb = new DatabaseService<IBoard>(new Board().model);
 
     schema.pre('save', async function(this: IStory, next) {
-      const board: IBoard | null = await boardDb.findOne('', {
+      const board: IBoard = await boardDb.findOne('', {
         _id: this.board
       });
 
-      this.number = (board as IBoard).storyAccum;
+      this.number = board.storyAccum;
 
-      (board as IBoard).storyAccum++;
-      boardDb.update('', (board as IBoard)._id, board as IBoard);
+      board.storyAccum++;
+      boardDb.update('', board._id, board as IBoard);
 
       next();
     });

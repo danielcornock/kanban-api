@@ -8,11 +8,8 @@ export class DatabaseService<T extends Document> {
     this._model = model;
   }
 
-  public findOne(
-    userId: string,
-    params: IParams
-  ): DocumentQuery<T | null, T, {}> {
-    return this._model.findOne(params);
+  public findOne(userId: string, params: IParams): DocumentQuery<T, T, {}> {
+    return this._model.findOne(params) as DocumentQuery<T, T, {}>;
   }
 
   public findMany(userId: string, params?: IParams): DocumentQuery<T[], T, {}> {
