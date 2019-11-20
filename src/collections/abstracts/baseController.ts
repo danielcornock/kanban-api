@@ -22,9 +22,9 @@ export abstract class BaseController<
   protected readonly _validate: (document: D) => void;
   protected readonly _names: IParams;
 
-  constructor(model: M, validation: Validation<D>, names: IParams) {
+  constructor(entity: M, validation: Validation<D>, names: IParams) {
     this._names = names;
-    this._entity = model;
+    this._entity = entity;
     this._validate = validation.validate;
     this._res = new ResponseService();
     this._queryService = new QueryService();
@@ -33,7 +33,8 @@ export abstract class BaseController<
 
   public async getAll(req: IReq, res: IRes, next: INext) {
     try {
-      const docs: Array<D> = await this._modelDb.findMany('');
+      const params = this._queryService.buildParamQuery(req.params);
+      const docs: Array<D> = await this._modelDb.findMany('', params);
       this._res.successFind(res, { [this._names.plural]: docs });
     } catch (e) {
       return next(e);

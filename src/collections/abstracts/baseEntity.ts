@@ -1,17 +1,17 @@
 import { Model, Document, models, model, Schema } from 'mongoose';
 
 export abstract class BaseEntity<T extends Document> {
-  protected _model!: Model<T>;
+  protected _schema: Schema;
+  private _name: string;
 
-  constructor() {}
-
-  protected _getModel(name: string, schema: () => Schema<T>): Model<T> {
-    return models.Story ? models.Story : model<T>(name, schema());
+  constructor(schema: Schema, modelName: string) {
+    this._schema = schema;
+    this._name = modelName;
   }
 
-  protected abstract _createSchema(): Schema<T>;
-
   public get model(): Model<T> {
-    return this._model;
+    return models[this._name]
+      ? models[this._name]
+      : model<T>(this._name, this._schema);
   }
 }

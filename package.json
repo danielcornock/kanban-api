@@ -5,6 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "start": "nodemon dist/server.js",
+    "start:local": "NODE_ENV=local nodemon dist/server.js",
     "watch-ts": "tsc -w",
     "test": "mocha -r ts-node/register 'src/**/*.spec.ts'"
   },
