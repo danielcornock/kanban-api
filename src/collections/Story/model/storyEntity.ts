@@ -7,8 +7,6 @@ import { IBoard } from '../../Board/model/boardSchema';
 import { Board } from '../../Board/model/boardEntity';
 
 export class Story extends BaseEntity<IStory> {
-  private _boardDb: DatabaseService<IBoard>;
-
   constructor() {
     super(storySchema, Story.name);
     this._schemaConfig(storySchema);
