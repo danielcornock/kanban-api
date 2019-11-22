@@ -21,10 +21,7 @@ export class ColumnController extends BaseController<IColumn, Column>
   public async getAll(req: IReq, res: IRes, next: INext) {
     try {
       const params = this._queryService.buildParamQuery(req.params);
-      const columns = await this._modelDb
-        .findMany('', params)
-        .populate('stories')
-        .exec();
+      const columns = await this._modelDb.findMany('', params);
 
       this._res.successFind(res, { columns });
     } catch (e) {

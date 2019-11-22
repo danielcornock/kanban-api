@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { database, port, env } from './env';
+import { database, port, env, testingPort } from './env';
 import 'mocha';
 
 describe('env', () => {
@@ -32,6 +32,10 @@ describe('env', () => {
 
     it('should return the correct environment', () => {
       expect(env).to.equal(envEnv);
+    });
+
+    it('should return the correct testing port', () => {
+      expect(testingPort).to.equal('https://localhost:4200');
     });
   });
 });

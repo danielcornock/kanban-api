@@ -7,11 +7,8 @@ export const columnSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User'
     },
-    board: {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    title: String
+    title: String,
+    order: Number
   },
   {
     toJSON: { virtuals: true },

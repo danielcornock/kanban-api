@@ -24,3 +24,5 @@ export const database = (environment: string = 'development') => {
 
   return databases[environment];
 };
+
+export const testingPort: string = 'http://localhost:4200';

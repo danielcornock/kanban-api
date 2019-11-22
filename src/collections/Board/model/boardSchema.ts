@@ -3,7 +3,7 @@ import { Document, Schema } from 'mongoose';
 export interface IBoard extends Document {
   user: string;
   name: string;
-  column: { order: number; column: string };
+  columns: Array<{ order: number; column: string }>;
   storyAccum: number;
 }
 
@@ -20,11 +20,8 @@ export const boardSchema = new Schema(
     },
     columns: [
       {
-        order: Number,
-        column: {
-          type: Schema.Types.ObjectId,
-          ref: 'Column'
-        }
+        type: Schema.Types.ObjectId,
+        ref: 'Column'
       }
     ]
   },

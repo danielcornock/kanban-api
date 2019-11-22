@@ -4,6 +4,6 @@ import { Boardcontroller } from '../controller/boardController';
 
 export class BoardRouter extends BaseRoutes {
   constructor() {
-    super(new Boardcontroller(), 'story');
+    super(new Boardcontroller(), 'board');
   }
 }

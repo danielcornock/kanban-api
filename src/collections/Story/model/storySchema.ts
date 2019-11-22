@@ -1,6 +1,5 @@
 import { Schema } from 'mongoose';
 import { Document } from 'mongoose';
-import { IColumn } from '../../Column/model/columnSchema';
 
 export const storySchema = new Schema(
   {
