@@ -27,7 +27,7 @@ export abstract class BaseController<
     this._entity = entity;
     this._validate = validation.validate;
     this._res = new ResponseService();
-    this._queryService = new QueryService();
+    this._queryService = new QueryService(names.singular);
     this._modelDb = new DatabaseService<D>(this._entity.model as Model<D>);
   }
 

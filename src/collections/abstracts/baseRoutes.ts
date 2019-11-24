@@ -1,32 +1,16 @@
 import { Router } from 'express';
 import { IController } from '../../utilities/interfaces/IController';
 
-export abstract class BaseRoutes {
+export abstract class BaseRoutes<C extends IController> {
   protected _router: Router;
-  protected _controller: IController;
+  protected _controller: C;
 
-  constructor(controller: IController, name: string) {
+  constructor(controller: C) {
     this._controller = controller;
     this._router = Router({ mergeParams: true });
-    this._assignCrudRoutes(name);
   }
 
   public get routes(): Router {
     return this._router;
-  }
-
-  protected _assignCrudRoutes(name: string): void {
-    this._router.get('/', (...args) => this._controller.getAll(...args));
-    this._router.post('/', (...args) => this._controller.create(...args));
-
-    this._router.get(`/:${name}Id`, (...args) =>
-      this._controller.getOne(...args)
-    );
-    this._router.put(`/:${name}Id`, (...args) =>
-      this._controller.update(...args)
-    );
-    this._router.delete(`/:${name}Id`, (...args) =>
-      this._controller.delete(...args)
-    );
   }
 }

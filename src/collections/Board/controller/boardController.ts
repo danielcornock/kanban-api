@@ -8,9 +8,10 @@ import {
   IRes,
   INext
 } from '../../../utilities/interfaces/IMiddlewareParams';
+import { IBoardController } from './IBoardController';
 
 export class Boardcontroller extends BaseController<IBoard, Board>
-  implements IController {
+  implements IBoardController {
   constructor() {
     super(new Board(), new BoardValidation(), {
       singular: 'board',
@@ -27,12 +28,22 @@ export class Boardcontroller extends BaseController<IBoard, Board>
     }
   }
 
+  public async getList(req: IReq, res: IRes, next: INext) {
+    try {
+      console.log('hello');
+      const boards = await this._modelDb.findMany('').select('+name');
+      this._res.successFind(res, { boards });
+    } catch (e) {
+      return next(e);
+    }
+  }
+
   public async getOne(req: IReq, res: IRes, next: INext) {
     try {
       try {
-        const id = req.params[Object.keys(req.params)[0]];
+        const query = this._queryService.buildParamQuery(req.params);
         const board: IBoard = await this._modelDb
-          .findOne('', { _id: id })
+          .findOne('', query)
           .populate('columns');
         this._res.successFind(res, { board });
       } catch (e) {
