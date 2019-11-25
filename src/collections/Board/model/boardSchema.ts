@@ -15,7 +15,7 @@ export const boardSchema = new Schema(
     name: String,
     storyAccum: {
       type: Number,
-      default: 0
+      default: 1
     }
   },
   {

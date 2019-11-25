@@ -19,15 +19,6 @@ export class Boardcontroller extends BaseController<IBoard, Board>
     });
   }
 
-  public async getAll(req: IReq, res: IRes, next: INext) {
-    try {
-      const boards = await this._modelDb.findMany('').populate('columns');
-      this._res.successFind(res, { boards });
-    } catch (e) {
-      return next(e);
-    }
-  }
-
   public async getList(req: IReq, res: IRes, next: INext) {
     try {
       const boards = await this._modelDb.findMany('').select('+name');

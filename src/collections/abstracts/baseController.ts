@@ -10,6 +10,7 @@ import {
   INext
 } from '../../utilities/interfaces/IMiddlewareParams';
 import { IParams } from '../../utilities/interfaces/IParams';
+import { IDataNames } from './interfaces/IDataNames';
 
 export abstract class BaseController<
   D extends Document,
@@ -22,7 +23,7 @@ export abstract class BaseController<
   protected readonly _validate: (document: D) => void;
   protected readonly _names: IParams;
 
-  constructor(entity: M, validation: Validation<D>, names: IParams) {
+  constructor(entity: M, validation: Validation<D>, names: IDataNames) {
     this._names = names;
     this._entity = entity;
     this._validate = validation.validate;
@@ -43,9 +44,12 @@ export abstract class BaseController<
 
   public async create(req: IReq, res: IRes, next: INext) {
     try {
-      Object.assign(req.body, this._queryService.buildParamQuery(req.params));
-      this._validate(req.body);
-      const doc: D = await this._modelDb.create('', req.body);
+      const body = {
+        ...req.body,
+        ...this._queryService.buildParamQuery(req.params)
+      };
+      this._validate(body);
+      const doc: D = await this._modelDb.create('', body);
       this._res.successCreate(res, { [this._names.singular]: doc });
     } catch (e) {
       return next(e);
