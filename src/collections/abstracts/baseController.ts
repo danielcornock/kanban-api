@@ -43,6 +43,7 @@ export abstract class BaseController<
 
   public async create(req: IReq, res: IRes, next: INext) {
     try {
+      Object.assign(req.body, this._queryService.buildParamQuery(req.params));
       this._validate(req.body);
       const doc: D = await this._modelDb.create('', req.body);
       this._res.successCreate(res, { [this._names.singular]: doc });

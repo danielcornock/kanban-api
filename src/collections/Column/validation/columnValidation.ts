@@ -9,6 +9,7 @@ export class ColumnValidation extends Validation<IColumn> {
 
   public validate(column: IColumn): void {
     if (!exists(column.title)) throw new Error('A column must have a title');
+    if (!exists(column.board)) throw new Error('A column must have a board');
 
     if (!isGuid(column.user)) throw new Error('That is not a valid GUID');
     if (!isGuid(column.board)) throw new Error('That is not a valid GUID');

@@ -19,20 +19,7 @@ export class Router {
     this._initialiseCrudRoutes(app);
   }
 
-  private _initialiseCrudRoutes(app: express.Application): void {
-    app.use(
-      '/api/v1/stories',
-      new CrudRoutes(new StoryController(), 'story').routes
-    );
-    app.use(
-      '/api/v1/columns',
-      new CrudRoutes(new ColumnController(), 'column').routes
-    );
-    app.use(
-      '/api/v1/boards',
-      new CrudRoutes(new Boardcontroller(), 'board').routes
-    );
-  }
+  private _initialiseCrudRoutes(app: express.Application): void {}
 
   private _initialiseExtendedRoutes(app: express.Application): void {
     app.use('/api/v1/stories', new StoryRouter().routes);

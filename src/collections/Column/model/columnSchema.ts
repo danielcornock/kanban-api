@@ -7,6 +7,10 @@ export const columnSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User'
     },
+    board: {
+      type: Schema.Types.ObjectId,
+      ref: 'Board'
+    },
     title: String,
     order: Number
   },

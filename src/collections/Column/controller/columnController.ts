@@ -18,6 +18,20 @@ export class ColumnController extends BaseController<IColumn, Column>
     });
   }
 
+  public async create(req: IReq, res: IRes, next: INext) {
+    try {
+      console.log('here');
+      const body = {
+        ...req.body,
+        ...this._queryService.buildParamQuery(req.params)
+      };
+      const column = await this._modelDb.create('', body);
+      this._res.successCreate(res, { column });
+    } catch (e) {
+      return next(e);
+    }
+  }
+
   public async getAll(req: IReq, res: IRes, next: INext) {
     try {
       const params = this._queryService.buildParamQuery(req.params);
