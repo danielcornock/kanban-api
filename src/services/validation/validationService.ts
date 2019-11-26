@@ -19,5 +19,9 @@ export const isValidPassword = (testString: string) => {
 };
 
 export const exists = (testItem: any) => {
-  return !(typeof testItem === 'undefined' || testItem === null);
+  return !(
+    typeof testItem === 'undefined' ||
+    testItem === null ||
+    testItem === ''
+  );
 };

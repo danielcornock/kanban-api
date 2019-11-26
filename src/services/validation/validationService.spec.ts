@@ -105,5 +105,13 @@ describe('validationService', () => {
         expect(exists(input)).to.be.false;
       });
     });
+
+    describe('when the input is an empty string', () => {
+      const input = '';
+
+      it('should return false', () => {
+        expect(exists(input)).to.be.false;
+      });
+    });
   });
 });

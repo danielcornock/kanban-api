@@ -1,4 +1,4 @@
-import { IRes } from '../utilities/interfaces/IMiddlewareParams';
+import { IRes } from '../../utilities/interfaces/IMiddlewareParams';
 
 export class ResponseService {
   public successFind(res: IRes, data: object | Array<object>): void {
@@ -19,7 +19,7 @@ export class ResponseService {
     });
   }
 
-  public successDelete(res: IRes) {
+  public successDelete(res: IRes): void {
     res.status(204).send();
   }
 }

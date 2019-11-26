@@ -1,4 +1,4 @@
-import { ResponseService } from '../../services/responseService';
+import { ResponseService } from '../../services/response/responseService';
 import { QueryService } from '../../services/query/queryService';
 import { DatabaseService } from '../../services/database/databaseService';
 import { Document, Model } from 'mongoose';

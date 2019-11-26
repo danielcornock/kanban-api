@@ -35,7 +35,7 @@ describe('env', () => {
     });
 
     it('should return the correct testing port', () => {
-      expect(testingPort).to.equal('https://localhost:4200');
+      expect(testingPort).to.equal('http://localhost:4200');
     });
   });
 });
