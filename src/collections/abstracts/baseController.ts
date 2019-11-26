@@ -20,13 +20,13 @@ export abstract class BaseController<
   protected readonly _queryService: QueryService;
   protected readonly _entity: M;
   protected readonly _modelDb: DatabaseService<D>;
-  protected readonly _validate: (document: D) => void;
+  protected readonly _validation: Validation<D>;
   protected readonly _names: IParams;
 
   constructor(entity: M, validation: Validation<D>, names: IDataNames) {
     this._names = names;
     this._entity = entity;
-    this._validate = validation.validate;
+    this._validation = validation;
     this._res = new ResponseService();
     this._queryService = new QueryService(names.singular);
     this._modelDb = new DatabaseService<D>(this._entity.model as Model<D>);
@@ -48,7 +48,7 @@ export abstract class BaseController<
         ...req.body,
         ...this._queryService.buildParamQuery(req.params)
       };
-      this._validate(body);
+      this._validation.validate(body);
       const doc: D = await this._modelDb.create('', body);
       this._res.successCreate(res, { [this._names.singular]: doc });
     } catch (e) {
@@ -78,7 +78,7 @@ export abstract class BaseController<
 
   public async update(req: IReq, res: IRes, next: INext) {
     try {
-      this._validate(req.body);
+      this._validation.validate(req.body);
       const params = this._queryService.buildParamQuery(req.params);
       const [updated]: Array<D> = await this._modelDb.update(
         '',

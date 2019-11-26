@@ -16,7 +16,6 @@ export class Board extends BaseEntity<IBoard> {
     });
 
     schema.pre('findOne', function(this: Query<IBoard>) {
-      console.log('pre');
       this.populate('columns');
     });
   }
