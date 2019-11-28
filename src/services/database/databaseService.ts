@@ -42,11 +42,12 @@ export class DatabaseService<T extends Document> {
     userId: string,
     query: IParams,
     data: IParams
-  ): Promise<[T, T]> {
-    const doc = await this.findOne(userId, query);
-    const oldDocument = JSON.parse(JSON.stringify(doc));
-    const updatedDoc = Object.assign(doc, data);
-    const docResponse = await updatedDoc.save();
-    return [docResponse, oldDocument];
+  ): Promise<[T]> {
+    const docResponse = (await this._model.findByIdAndUpdate(query, data)) as T;
+    // const doc = await this.findOne(userId, query);
+    // const oldDocument = JSON.parse(JSON.stringify(doc));
+    // const updatedDoc = Object.assign(doc, data);
+    // const docResponse = await updatedDoc.save();
+    return [docResponse];
   }
 }

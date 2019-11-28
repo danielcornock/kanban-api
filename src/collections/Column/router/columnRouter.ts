@@ -9,7 +9,7 @@ export class ColumnRouter extends BaseRoutes<IController> {
     this._router = new CrudRoutes(
       this._controller,
       this._router,
-      'name'
+      'column'
     ).routes;
   }
 }
