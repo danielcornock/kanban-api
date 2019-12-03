@@ -9,14 +9,14 @@ import {
   INext
 } from '../../../utilities/interfaces/IMiddlewareParams';
 import { IBoardController } from './IBoardController';
+import { ResponseService } from '../../../services/response/responseService';
+import { QueryService } from '../../../services/query/queryService';
+import { DatabaseService } from '../../../services/database/databaseService';
 
-export class Boardcontroller extends BaseController<IBoard, Board>
+export class BoardController extends BaseController<IBoard, Board>
   implements IBoardController {
-  constructor() {
-    super(new Board(), new BoardValidation(), {
-      singular: 'board',
-      plural: 'boards'
-    });
+  constructor(...args: any) {
+    super(...args);
   }
 
   public async getList(req: IReq, res: IRes, next: INext) {
@@ -27,4 +27,20 @@ export class Boardcontroller extends BaseController<IBoard, Board>
       return next(e);
     }
   }
+}
+
+export function boardDependencies(): Array<any> {
+  const names = {
+    singular: 'board',
+    plural: 'boards'
+  };
+  const entity = new Board();
+  return [
+    entity,
+    new BoardValidation(),
+    new ResponseService(),
+    new QueryService(names.singular),
+    new DatabaseService<IBoard>(entity.model),
+    names
+  ];
 }

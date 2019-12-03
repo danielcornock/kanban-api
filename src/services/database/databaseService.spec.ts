@@ -22,7 +22,7 @@ describe('databaseService', () => {
 
   model = new Story().model;
   dbService = new DatabaseService(model);
-  params = { test: 'test' };
+  params = { test: 'test1' };
   storyRes = {
     _id: '0000',
     user: '0001',

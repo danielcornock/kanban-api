@@ -23,13 +23,13 @@ export abstract class BaseController<
   protected readonly _validation: Validation<D>;
   protected readonly _names: IParams;
 
-  constructor(entity: M, validation: Validation<D>, names: IDataNames) {
-    this._names = names;
-    this._entity = entity;
-    this._validation = validation;
-    this._res = new ResponseService();
-    this._queryService = new QueryService(names.singular);
-    this._modelDb = new DatabaseService<D>(this._entity.model as Model<D>);
+  constructor(...args: any) {
+    this._entity = args[0];
+    this._validation = args[1];
+    this._res = args[2];
+    this._queryService = args[3];
+    this._modelDb = args[4];
+    this._names = args[5];
   }
 
   public async getAll(req: IReq, res: IRes, next: INext) {

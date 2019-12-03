@@ -3,10 +3,6 @@ import { StoryRouter } from './Story/router/storyRouter';
 import { ColumnRouter } from './Column/router/columnRouter';
 import { BoardRouter } from './Board/router/boardRouter';
 import { IParams } from '../utilities/interfaces/IParams';
-import { CrudRoutes } from './abstracts/crudRoutes';
-import { StoryController } from './Story/controller/storyController';
-import { ColumnController } from './Column/controller/columnController';
-import { Boardcontroller } from './Board/controller/boardController';
 
 export class Router {
   private _routes: IParams = {

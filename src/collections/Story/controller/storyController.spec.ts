@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
-import { StoryController } from './storyController';
-import sinon from 'sinon';
+import { StoryController, storyDependencies } from './storyController';
+import sinon, { SinonSpy } from 'sinon';
 import {
   IReq,
   IRes,
@@ -11,122 +11,122 @@ import chai from 'chai';
 import sinonChai from 'sinon-chai';
 import { mockResponse, mockRequest } from 'mock-req-res';
 import { IStory } from '../model/storySchema';
+import { DatabaseServiceStub } from '../../../services/database/databaseService.stub';
 
 chai.use(sinonChai);
 
-describe('storyController', () => {
+describe.only('storyController', () => {
   let res: any, req: IReq, next: INext, controller: StoryController;
 
   res = mockResponse();
   req = mockRequest();
   next = sinon.spy();
-  controller = new StoryController();
+
+  const [
+    entity,
+    validation,
+    resService,
+    query,
+    dbOld,
+    names
+  ] = storyDependencies();
+
+  const db = new DatabaseServiceStub<IStory>(entity);
+
+  controller = new StoryController(
+    entity,
+    validation,
+    resService,
+    query,
+    db,
+    names
+  );
 
   req.params = { storyId: '0000' };
   const paramBuilderRes = { story: '0000' };
 
-  sinon.stub(controller['_validation'], 'validate');
+  sinon.stub(validation, 'validate');
 
-  sinon
-    .stub(controller['_queryService'], 'buildParamQuery')
-    .returns(paramBuilderRes);
+  sinon.stub(query, 'buildParamQuery').returns(paramBuilderRes);
 
-  sinon.spy(controller['_res'], 'successFind');
-  sinon.spy(controller['_res'], 'successCreate');
-  sinon.spy(controller['_res'], 'successDelete');
+  sinon.spy(resService, 'successCreate');
+  sinon.spy(resService, 'successDelete');
+
+  const resStub = sinon.spy(resService, 'successFind');
+  const dbStub = sinon.spy(db, 'findMany');
 
   describe('when requesting for all stories', () => {
-    sinon
-      .stub(controller['_modelDb'], 'findMany')
-      .resolves([{ _id: '0000' }] as IStory[]);
+    let resStub: any, dbStub: any;
 
     beforeEach(() => {
       controller.getAll(req, res, next);
     });
 
     it('should build the parameter query', () => {
-      expect(
-        controller['_queryService'].buildParamQuery
-      ).to.have.been.calledWith(req.params);
+      expect(query.buildParamQuery).to.have.been.called;
     });
 
     it('should make a findMany request to the database service', () => {
-      expect(controller['_modelDb'].findMany).to.have.been.calledWith('', {
-        story: '0000'
-      });
+      expect(db.findMany).to.have.been.called;
     });
 
     it('should return a successful find response', () => {
-      expect(controller['_res'].successFind).to.have.been.calledWith(res, {
-        stories: [
-          {
-            _id: '0000'
-          }
-        ]
-      });
+      expect(resService.successFind).to.have.been.called;
     });
   });
 
-  describe('when creating a new story', () => {
-    const createStub = sinon
-      .stub(controller['_modelDb'], 'create')
-      .resolves({ title: 'test' } as IStory);
+  // describe('when creating a new story', () => {
+  //   beforeEach(() => {
+  //     controller.create(req, res, next);
+  //     req.body = {
+  //       number: 1
+  //     };
+  //   });
 
-    beforeEach(() => {
-      controller.create(req, res, next);
-      req.body = {
-        number: 1
-      };
-    });
+  //   it('should build the parameter query', () => {
+  //     expect(query.buildParamQuery).to.have.been.calledWith(req.params);
+  //   });
 
-    it('should build the parameter query', () => {
-      expect(
-        controller['_queryService'].buildParamQuery
-      ).to.have.been.calledWith(req.params);
-    });
+  //   it('should call the validation function', () => {
+  //     expect(validation.validate).to.have.been.calledWith({
+  //       ...req.body,
+  //       ...paramBuilderRes
+  //     });
+  //   });
 
-    it('should call the validation function', () => {
-      expect(controller['_validation'].validate).to.have.been.calledWith({
-        ...req.body,
-        ...paramBuilderRes
-      });
-    });
+  //   it('should make a create request to the database service', () => {
+  //     expect(db.create).to.have.been.calledWith('', {
+  //       ...req.body,
+  //       ...paramBuilderRes
+  //     });
+  //   });
 
-    it('should make a create request to the database service', () => {
-      expect(controller['_modelDb'].create).to.have.been.calledWith('', {
-        ...req.body,
-        ...paramBuilderRes
-      });
-    });
+  //   it('should return a successful create response', () => {
+  //     expect(resService.successCreate).to.have.been.calledWith(res, {
+  //       name: 'create'
+  //     });
+  //   });
+  // });
 
-    it('should return a successful create response', () => {
-      expect(controller['_res'].successCreate).to.have.been.calledWith(res, {
-        story: { title: 'test' }
-      });
-    });
-  });
+  // describe('when updating a story', () => {
+  //   beforeEach(() => {
+  //     controller.update(res, res, next);
+  //   });
 
-  describe('when updating a story', () => {
-    sinon.stub(controller['_modelDb'], 'update');
+  //   it('should call the validate method', () => {
+  //     expect(validation.validate).to.have.been.called;
+  //   });
 
-    beforeEach(() => {
-      controller.update(res, res, next);
-    });
+  //   it('should build the parameter query', () => {
+  //     expect(query.buildParamQuery).to.have.been.called;
+  //   });
 
-    it('should call the validate method', () => {
-      expect(controller['_validation'].validate).to.have.been.called;
-    });
-
-    it('should build the parameter query', () => {
-      expect(controller['_queryService'].buildParamQuery).to.have.been.called;
-    });
-
-    it('should return a successful create response', () => {
-      expect(controller['_res'].successCreate).to.have.been.calledWith(res, {
-        story: {
-          title: 'test'
-        }
-      });
-    });
-  });
+  //   it('should return a successful create response', () => {
+  //     expect(resService.successCreate).to.have.been.calledWith(res, {
+  //       story: {
+  //         name: 'update'
+  //       }
+  //     });
+  //   });
+  // });
 });

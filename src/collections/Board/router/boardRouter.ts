@@ -1,13 +1,16 @@
 import { BaseRoutes } from '../../abstracts/baseRoutes';
 import { IBoard } from '../model/boardSchema';
-import { Boardcontroller } from '../controller/boardController';
+import {
+  BoardController,
+  boardDependencies
+} from '../controller/boardController';
 import { IBoardController } from '../controller/IBoardController';
 import { ColumnRouter } from '../../Column/router/columnRouter';
 import { CrudRoutes } from '../../abstracts/crudRoutes';
 
 export class BoardRouter extends BaseRoutes<IBoardController> {
   constructor() {
-    super(new Boardcontroller());
+    super(new BoardController(...boardDependencies()));
     this._extendedRoutes();
     this._externalRoutes();
     this._router = new CrudRoutes(
