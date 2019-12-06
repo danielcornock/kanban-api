@@ -37,12 +37,7 @@ describe('databaseService', () => {
     testData: 'testData'
   };
 
-  storyResFunc = {
-    ...storyRes,
-    save: sinon.stub().resolves({ ...storyRes, ...data })
-  } as any;
-
-  sinon.stub(model, 'findOne').resolves(storyResFunc);
+  sinon.stub(model, 'findOne');
   sinon.spy(model, 'find');
   sinon.spy(model, 'create');
   sinon.spy(model, 'deleteOne');
@@ -93,10 +88,6 @@ describe('databaseService', () => {
 
     it('should call the findOne model function', () => {
       expect(model.findOne).to.have.been.calledWith(params);
-    });
-
-    it('should call the save function', () => {
-      expect(storyResFunc.save).to.have.been.called;
     });
   });
 
